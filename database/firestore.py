@@ -5,7 +5,11 @@ import os
 
 print(os.path.dirname(os.path.realpath(__file__)))
 
-# cred = credentials.Certificate(os.path.dirname(os.path.realpath(__file__)) + '/cred.json')
+try:
+  os.environ['FLASK_ENVIRON'] == 'production'
+except KeyError:
+  os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.path.dirname(__file__) + '/cred.json'
+
 firebase_admin.initialize_app()
 
 db = firestore.client()

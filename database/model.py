@@ -1,15 +1,15 @@
 from database.firestore import db
 import database.users as users
+import database.schedules as schedules
 
-class Users(object):
-  def __init__(self, subscriberID='default', calendarType='default', calendarUrl='default', firstName='NoFirstName', lastName='NoLastName'):
-    self.subscriberID = subscriberID
-    self.calendarType = calendarType
-    self.calendarUrl = calendarUrl
-    self.firstName = firstName
-    self.lastName = lastName
+class Model():
+  def __init__(self):
+    self.User = users.User()
+    self.Schedule = schedules.Schedule()
 
-  @staticmethod
-  def getAll():
-    allUsers = users.userRef.get()
-    return allUsers
+  def getAllUsers(self):
+    return self.User.getAll()
+
+  def addNewUser(self, userData):
+    return self.User.addUser(userData)
+
